@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres
+    container_name: car_manager_db
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      # - postgres_data:/var/lib/postgresql/data # Maps to Docker-managed volume
+      - ${HOST_MOUNTED_PATH}:/var/lib/postgresql/data # Uncomment this for host-mounted volume
+    networks:
+      - car_manager_network
+
+# volumes:
+#   postgres_data: # Named Docker volume (comment this if using a host-mounted volume)
+
+networks:
+  car_manager_network:
+    driver: bridge

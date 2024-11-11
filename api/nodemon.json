@@ -1,0 +1,5 @@
+{
+  "watch": ["*"],
+  "ext": "mjs,json",
+  "exec": "node index.mjs"
+}
