@@ -1,7 +1,9 @@
-export default function Home() {
+import Login from "@/components/function/Login/Login";
+
+export default function Entrance() {
   return (
-    <div className="">
-      <h1>HOME</h1>
+    <div className="w-full h-full flex items-center justify-center">
+      <Login />
     </div>
   );
 }
