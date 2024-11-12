@@ -3,7 +3,7 @@ import sequelize from "./src/db/index.mjs";
 import { setupAssociations } from "./src/models/associations.mjs";
 import { testConnection } from "./src/db/index.mjs";
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 const startServer = async () => {
   await testConnection();
