@@ -3,7 +3,9 @@ import "./globals.css";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="bg-primary text-white w-screen h-screen p-3 py-4 flex items-start justify-center">
+        {children}
+      </body>
     </html>
   );
 }
