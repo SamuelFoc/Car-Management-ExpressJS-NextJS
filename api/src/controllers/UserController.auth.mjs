@@ -73,6 +73,33 @@ export const login = async (req, res) => {
   }
 };
 
+export const validateToken = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res
+        .status(401)
+        .json({ message: "Authorization header missing or malformed." });
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    // Verify the token
+    const decoded = jwt.verify(token, JWT_SECRET);
+
+    res.json({ message: "Token is valid.", decoded });
+  } catch (error) {
+    console.error("Error validating token:", error);
+
+    if (error.name === "TokenExpiredError") {
+      return res.status(401).json({ message: "Token has expired." });
+    }
+
+    return res.status(401).json({ message: "Invalid token." });
+  }
+};
+
 export const requestPasswordReset = async (req, res) => {
   try {
     const { email } = req.body;
