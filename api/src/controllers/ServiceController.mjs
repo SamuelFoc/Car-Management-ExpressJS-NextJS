@@ -4,9 +4,9 @@ import ServicePart from "../models/ServicePart.mjs";
 export const addService = async (req, res) => {
   try {
     const { carId } = req.params; // Get carId from params
-    const { date, mileage, notes, parts } = req.body;
+    const { parts } = req.body;
 
-    const newService = await Service.create({ carId, date, mileage, notes });
+    const newService = await Service.create({ carId, ...req.body });
 
     // Associate parts with the service
     if (parts && parts.length > 0) {
