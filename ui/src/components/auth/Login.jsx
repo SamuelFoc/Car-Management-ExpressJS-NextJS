@@ -44,6 +44,7 @@ export default function Login() {
         <Message type={"error"}>{error}</Message>
         <form className="text-gray-700 text-xl">
           <FormInput
+            id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -52,6 +53,7 @@ export default function Login() {
             Email
           </FormInput>
           <FormInput
+            id="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
