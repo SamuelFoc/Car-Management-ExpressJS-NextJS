@@ -12,7 +12,6 @@ export default function Cars() {
       try {
         const res = await apiFetch("/users/info");
         setUserCarsData(res);
-        console.log(res);
       } catch (error) {
         console.error("Error fetching user details:", error.message);
       }
