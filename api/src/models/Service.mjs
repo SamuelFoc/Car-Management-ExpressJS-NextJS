@@ -17,6 +17,11 @@ const Service = sequelize.define(
         key: "id",
       },
     },
+    type: {
+      type: DataTypes.STRING,
+      defaultValue: "Regular Service",
+      allowNull: false,
+    },
     date: {
       type: DataTypes.DATE,
       allowNull: false, // Date of the service
@@ -25,7 +30,7 @@ const Service = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false, // Car mileage during the service
     },
-    notes: {
+    changed: {
       type: DataTypes.TEXT,
       allowNull: true, // Optional notes for the service
     },
