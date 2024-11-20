@@ -42,6 +42,10 @@ const Car = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    enginePower: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
     drivetrain: {
       type: DataTypes.ENUM("4WD", "2WD"),
       allowNull: true,
