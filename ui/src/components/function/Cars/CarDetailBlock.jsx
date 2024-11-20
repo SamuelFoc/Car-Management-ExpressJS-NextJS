@@ -4,12 +4,12 @@ import Image from "next/image";
 export default function CarDetailBlock({ image, details }) {
   return (
     <Block gap={5}>
-      <Image src={image} alt="detail-icon" width={100} height={50} />
+      <Image src={image} alt="detail-icon" width={50} height={50} />
       <div className="w-full">
         {Object.keys(details)?.map((key) => {
           return (
-            <div className="w-full flex gap-2">
-              <strong>{key}:</strong>
+            <div key={key} className="w-full flex gap-2">
+              <strong>{key?.split("_").join(" ")}:</strong>
               <span>{details[key]}</span>
             </div>
           );
