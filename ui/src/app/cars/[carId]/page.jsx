@@ -2,11 +2,12 @@
 import CarDetailBlock from "@/components/function/Cars/CarDetailBlock";
 import Container from "@/components/layout/container/Container";
 import { apiFetch } from "@/utils/apiFetch";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function CarDetails() {
   const { carId } = useParams();
+  const router = useRouter();
   const [carDetails, setCarDetails] = useState();
 
   useEffect(() => {
@@ -14,7 +15,6 @@ export default function CarDetails() {
       try {
         const res = await apiFetch(`/cars/${carId}`);
         setCarDetails(res?.car);
-        console.log(res);
       } catch (error) {
         console.error("Error fetching user details:", error.message);
       }
@@ -23,17 +23,28 @@ export default function CarDetails() {
     fetchCarDetails();
   }, []);
 
+  const goBack = () => {
+    router.back();
+  };
+
   return (
     <Container>
-      <h1 className="text-2xl font-bold">
-        <strong>{carDetails?.make}</strong>&ensp;
-        <strong>{carDetails?.model}</strong>&ensp;
-        <span className="opacity-40">({carDetails?.year})</span>
-      </h1>
+      <div className="flex justify-evenly items-center">
+        <div className="font-bold text-2xl" onClick={goBack}>
+          ⏪
+        </div>
+        <div>
+          <h1 className="text-2xl font-bold">
+            <strong>{carDetails?.make}</strong>&ensp;
+            <strong>{carDetails?.model}</strong>&ensp;
+            <span className="opacity-40">({carDetails?.year})</span>
+          </h1>
+        </div>
+      </div>
       <CarDetailBlock
         image={"/info_icon.png"}
         details={{
-          License: carDetails?.licensePlate,
+          License_Plate: carDetails?.licensePlate,
           VIN: carDetails?.vin,
           Mileage: carDetails?.mileage,
         }}
@@ -45,7 +56,7 @@ export default function CarDetails() {
       <CarDetailBlock
         image={"/wheel_icon.png"}
         details={{
-          Powered_wheels: carDetails?.powerWheels,
+          Powered_Wheels: carDetails?.powerWheels,
           Drivetrain: carDetails?.drivetrain,
         }}
       />
