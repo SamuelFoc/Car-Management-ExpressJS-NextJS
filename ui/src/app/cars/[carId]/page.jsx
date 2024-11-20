@@ -1,13 +1,18 @@
 "use client";
-import CarDetailBlock from "@/components/function/Cars/CarDetailBlock";
-import Container from "@/components/layout/container/Container";
+import CarDetailBlock from "@/components/functional/Cars/CarDetailBlock";
+import Services from "@/components/functional/Services/Services";
+import SecureContainer from "@/components/layout/container/SecureContainer";
+import Footer from "@/components/layout/footer/Footer";
+import BackButton from "@/components/ui/BackButton";
+import NavBar from "@/components/ui/Navbar";
+import Row from "@/components/ui/Row";
+import Title from "@/components/ui/Title";
 import { apiFetch } from "@/utils/apiFetch";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function CarDetails() {
   const { carId } = useParams();
-  const router = useRouter();
   const [carDetails, setCarDetails] = useState();
 
   useEffect(() => {
@@ -23,43 +28,41 @@ export default function CarDetails() {
     fetchCarDetails();
   }, []);
 
-  const goBack = () => {
-    router.back();
-  };
-
   return (
-    <Container>
-      <div className="flex justify-evenly items-center">
-        <div className="font-bold text-2xl" onClick={goBack}>
-          ⏪
-        </div>
-        <div>
-          <h1 className="text-2xl font-bold">
-            <strong>{carDetails?.make}</strong>&ensp;
-            <strong>{carDetails?.model}</strong>&ensp;
-            <span className="opacity-40">({carDetails?.year})</span>
-          </h1>
-        </div>
-      </div>
+    <SecureContainer>
+      <NavBar />
+      <Row>
+        <Title subtitle={carDetails?.year}>
+          {carDetails?.make + " " + carDetails?.model}
+        </Title>
+        <BackButton>◀</BackButton>
+      </Row>
       <CarDetailBlock
-        image={"/info_icon.png"}
+        image={"/info-icon.png"}
         details={{
           License_Plate: carDetails?.licensePlate,
           VIN: carDetails?.vin,
-          Mileage: carDetails?.mileage,
+          Mileage: carDetails?.mileage + " km",
         }}
       />
       <CarDetailBlock
-        image={"/engine_icon.png"}
-        details={{ Engine: carDetails?.engine }}
+        image={"/engine-icon.png"}
+        details={{
+          Engine: carDetails?.engine,
+          Engine_Power: carDetails?.enginePower + " HP",
+        }}
       />
       <CarDetailBlock
-        image={"/wheel_icon.png"}
+        image={"/wheel-icon.png"}
         details={{
           Powered_Wheels: carDetails?.powerWheels,
           Drivetrain: carDetails?.drivetrain,
         }}
       />
-    </Container>
+      <br />
+      <Title>Service History</Title>
+      <Services carId={carId} />
+      <Footer />
+    </SecureContainer>
   );
 }
