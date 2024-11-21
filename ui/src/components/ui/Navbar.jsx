@@ -16,7 +16,7 @@ export default function NavBar({ href }) {
 
   return (
     <nav className="w-full items-start text-3xl font-bold mb-5 flex justify-between">
-      <Logo href={href || "/"} />
+      {!isLoggingOut && <Logo href={href || "/"} />}
       <div
         onMouseEnter={() => setTooltipVisible(true)}
         onMouseLeave={() => setTooltipVisible(false)}
@@ -25,7 +25,7 @@ export default function NavBar({ href }) {
       >
         <div
           className={`transition-transform duration-200 ${
-            tooltipVisible ? "translate-x-[-5rem]" : ""
+            tooltipVisible ? "sm:translate-x-[-7rem]" : ""
           }`}
         >
           {isLoggingOut ? (
@@ -37,8 +37,8 @@ export default function NavBar({ href }) {
           )}
         </div>
         <span
-          className={`absolute w-28 text-secondary text-lg transition duration-200 ${
-            tooltipVisible ? "translate-x-[-2rem] opacity-100" : "opacity-0"
+          className={`absolute w-28 text-secondary text-lg transition duration-500 ${
+            tooltipVisible ? "hidden sm:translate-x-[-4rem] sm:block" : "hidden"
           }`}
         >
           Log me out
