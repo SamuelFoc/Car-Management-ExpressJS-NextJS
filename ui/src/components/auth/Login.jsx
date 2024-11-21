@@ -40,7 +40,7 @@ export default function Login() {
   return (
     <div className="h-full w-full flex items-center justify-center">
       <div className="p-8 w-full max-w-md">
-        <Logo />
+        <Logo href={"/home"} />
         <Message type={"error"}>{error}</Message>
         <form className="text-gray-700 text-xl">
           <FormInput
