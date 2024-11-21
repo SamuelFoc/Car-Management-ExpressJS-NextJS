@@ -3,20 +3,53 @@ version: "3.8"
 services:
   postgres:
     image: postgres
-    container_name: car_manager_db
+    container_name: v_manager_db
     env_file:
       - .env
     ports:
       - "5432:5432"
     volumes:
-      # - postgres_data:/var/lib/postgresql/data # Maps to Docker-managed volume
-      - ${HOST_MOUNTED_PATH}:/var/lib/postgresql/data # Uncomment this for host-mounted volume
+      # Uncomment the desired volume configuration
+      # - postgres_data:/var/lib/postgresql/data # Docker-managed volume
+      - ${HOST_MOUNTED_PATH}:/var/lib/postgresql/data # Host-mounted volume
     networks:
-      - car_manager_network
+      - v_manager_network
 
-# volumes:
-#   postgres_data: # Named Docker volume (comment this if using a host-mounted volume)
+  api:
+    build:
+      context: ./api # Path to the API source code directory
+      dockerfile: Dockerfile
+    container_name: v_manager_api
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: v_manager_db
+      DB_PORT: 5432
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
+      PORT: 5000
+      JWT_SECRET: 7f1a0fe2778dfd43a1b5ab479c41b586bb9cc8f7c12bef9a68a89bd1c5407e507d58468d8541e2dd4d4b9c5da54a0ddfe44d5a96348709116f54e4a5d13405aa
+      JWT_EXPIRATION: 10h
+    depends_on:
+      - ui
+    networks:
+      - v_manager_network
+
+  ui:
+    build:
+      context: ./ui # Path to the UI source code directory
+      dockerfile: Dockerfile
+    container_name: v_manager_ui
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_URL: http://localhost:5000 # Point the UI to the API service
+    depends_on:
+      - postgres
+    networks:
+      - v_manager_network
 
 networks:
-  car_manager_network:
+  v_manager_network:
     driver: bridge
