@@ -30,7 +30,7 @@ export default function CarDetails() {
 
   return (
     <SecureContainer>
-      <NavBar />
+      <NavBar href={"/home"} />
       <Row>
         <Title subtitle={carDetails?.year}>
           {carDetails?.make + " " + carDetails?.model}
