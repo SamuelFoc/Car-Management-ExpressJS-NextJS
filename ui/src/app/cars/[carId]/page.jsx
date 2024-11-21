@@ -39,25 +39,65 @@ export default function CarDetails() {
       </Row>
       <CarDetailBlock
         image={"/info-icon.png"}
-        details={{
-          License_Plate: carDetails?.licensePlate,
-          VIN: carDetails?.vin,
-          Mileage: carDetails?.mileage + " km",
-        }}
+        carId={carId}
+        details={[
+          {
+            label: "License Plate",
+            key: "licensePlate",
+            data: carDetails?.licensePlate,
+          },
+          {
+            label: "VIN",
+            key: "vin",
+            data: carDetails?.vin,
+          },
+          {
+            label: "Mileage",
+            key: "mileage",
+            data: carDetails?.mileage,
+          },
+        ]}
       />
       <CarDetailBlock
         image={"/engine-icon.png"}
-        details={{
-          Engine: carDetails?.engine,
-          Engine_Power: carDetails?.enginePower + " HP",
-        }}
+        carId={carId}
+        details={[
+          {
+            label: "Engine",
+            key: "engine",
+            data: carDetails?.engine,
+          },
+          {
+            label: "Engine Power",
+            key: "enginePower",
+            data: carDetails?.enginePower + "HP",
+          },
+        ]}
       />
       <CarDetailBlock
         image={"/wheel-icon.png"}
-        details={{
-          Powered_Wheels: carDetails?.powerWheels,
-          Drivetrain: carDetails?.drivetrain,
-        }}
+        carId={carId}
+        details={[
+          {
+            label: "Powered Wheels",
+            key: "powerWheels",
+            data: carDetails?.powerWheels,
+            selection: [
+              { value: "Front", label: "Front" },
+              { value: "Rear", label: "Rear" },
+              { value: "All", label: "All" },
+            ],
+          },
+          {
+            label: "Drivetrain",
+            key: "drivetrain",
+            data: carDetails?.drivetrain,
+            selection: [
+              { value: "4WD", label: "4WD" },
+              { value: "2WD", label: "2WD" },
+            ],
+          },
+        ]}
       />
       <br />
       <Title>Service History</Title>
