@@ -37,7 +37,11 @@ export default function AuthProvider({ children }) {
 
   // Render children only if authenticated
   if (!isAuthenticated) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-full h-screen flex items-center justify-center">
+        ⏳ Loading...
+      </div>
+    );
   }
 
   return <>{children}</>;
