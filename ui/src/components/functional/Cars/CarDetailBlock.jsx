@@ -44,7 +44,7 @@ export default function CarDetailBlock({ image, details, carId }) {
 
   return (
     <Block gap={5}>
-      <div className="w-full flex flex-col md:flex-row relative">
+      <div className="w-full flex flex-col justify-center items-center sm:flex-row relative">
         <button
           type="button"
           className="absolute top-0 right-0 cursor-pointer"
@@ -56,9 +56,12 @@ export default function CarDetailBlock({ image, details, carId }) {
         <div>
           <img className="w-40" src={image} alt="detail-icon" />
         </div>
-        <div className="w-full flex flex-col items-start justify-evenly">
+        <div className="w-full flex flex-col items-center sm:items-start justify-evenly">
           {details?.map(({ key, label, selection }) => (
-            <div key={key} className="w-full flex gap-2">
+            <div
+              key={key}
+              className="w-full flex gap-2 justify-center sm:justify-start"
+            >
               {isEditing ? (
                 selection ? (
                   <FormSelect
