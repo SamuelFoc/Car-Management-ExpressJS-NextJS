@@ -52,7 +52,7 @@ export default function CarDetails() {
             data: carDetails?.vin,
           },
           {
-            label: "Mileage",
+            label: "Mileage [km]",
             key: "mileage",
             data: carDetails?.mileage,
           },
@@ -68,9 +68,9 @@ export default function CarDetails() {
             data: carDetails?.engine,
           },
           {
-            label: "Engine Power",
+            label: "Engine Power [HP]",
             key: "enginePower",
-            data: carDetails?.enginePower + "HP",
+            data: carDetails?.enginePower,
           },
         ]}
       />
