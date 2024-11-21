@@ -17,7 +17,7 @@ export default function ServiceForm({ onSubmit, highestMileage }) {
 
     if (id === "mileage" && value) {
       const mileageValue = parseInt(value, 10);
-      if (mileageValue <= highestMileage) {
+      if (mileageValue < highestMileage) {
         setError(`Mileage must be higher than ${highestMileage} km.`);
       } else {
         setError("");
