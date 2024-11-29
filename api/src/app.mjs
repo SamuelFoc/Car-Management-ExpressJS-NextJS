@@ -6,6 +6,7 @@ import userRoutes from "./routes/userRoutes.mjs";
 import carRoutes from "./routes/carRoutes.mjs";
 import servicePartRoutes from "./routes/servicePartRoutes.mjs";
 import serviceRoutes from "./routes/serviceRoutes.mjs";
+import carDocumentRoutes from "./routes/carDocumentRoutes.mjs";
 
 dotenv.config();
 
@@ -31,5 +32,6 @@ app.use("/api/users", userRoutes);
 app.use("/api/cars", carRoutes);
 app.use("/api/service-parts", servicePartRoutes);
 app.use("/api/service", serviceRoutes);
+app.use("/api/documents", carDocumentRoutes);
 
 export default app;
