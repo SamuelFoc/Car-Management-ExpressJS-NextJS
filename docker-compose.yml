@@ -10,8 +10,8 @@ services:
       - "5432:5432"
     volumes:
       # Uncomment the desired volume configuration
-      # - postgres_data:/var/lib/postgresql/data # Docker-managed volume
-      - ${HOST_MOUNTED_PATH}:/var/lib/postgresql/data # Host-mounted volume
+      - postgres_data:/var/lib/postgresql/data # Docker-managed volume
+      # - ${HOST_MOUNTED_PATH}:/var/lib/postgresql/data # Host-mounted volume
     networks:
       - v_manager_network
 
@@ -53,3 +53,7 @@ services:
 networks:
   v_manager_network:
     driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
