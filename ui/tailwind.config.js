@@ -23,6 +23,17 @@ module.exports = {
         },
       },
     },
+    safelist: [
+      "bg-green-200",
+      "bg-green-400",
+      "bg-green-500",
+      "bg-red-200",
+      "bg-red-400",
+      "bg-red-500",
+      "bg-gray-200",
+      "bg-gray-400",
+      "bg-gray-500",
+    ],
   },
   plugins: [],
 };
