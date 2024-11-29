@@ -4,8 +4,9 @@ import ServiceCard from "./ServiceCard";
 import { useEffect, useState } from "react";
 import { apiFetch } from "@/utils/apiFetch";
 import AddService from "./AddService";
+import Title from "@/components/ui/Title";
 
-export default function Services({ carId }) {
+export default function Services({ children, carId }) {
   const [serviceHistory, setServiceHistory] = useState([]);
 
   useEffect(() => {
@@ -34,20 +35,23 @@ export default function Services({ carId }) {
   );
 
   return (
-    <Block>
-      <AddService carId={carId} highestMileage={highestMileage} />
-      <ResponsiveGrid>
-        {sortedServices.map((service) => (
-          <ServiceCard key={service?.id} data={service} carId={carId} />
-        ))}
-      </ResponsiveGrid>
-      {serviceHistory.length === 0 && (
-        <div className="w-full flex justify-center items-center">
-          <p className="w-full text-center">
-            This car has no service history yet!
-          </p>
-        </div>
-      )}
-    </Block>
+    <>
+      <Title>{children}</Title>
+      <Block>
+        <AddService carId={carId} highestMileage={highestMileage} />
+        <ResponsiveGrid>
+          {sortedServices.map((service) => (
+            <ServiceCard key={service?.id} data={service} carId={carId} />
+          ))}
+        </ResponsiveGrid>
+        {serviceHistory.length === 0 && (
+          <div className="w-full flex justify-center items-center">
+            <p className="w-full text-center">
+              This car has no service history yet!
+            </p>
+          </div>
+        )}
+      </Block>
+    </>
   );
 }
